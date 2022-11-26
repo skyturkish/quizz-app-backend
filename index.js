@@ -1,18 +1,24 @@
 const express = require('express')
+const passengerRouter = require('./routes/passengers')
+const indexRouter = require('./routes/index')
+const driverRouter = require('./routes/driver')
+const bookingRouter = require('./routes/booking')
+
+
+const bodyParser = require('body-parser') // bodyparser'ı post ile gönderdiğimizde json formartını anlasın diye ekliyoruz
+require('./routes/mongo-connection')
+
 const app = express()
-const port = 3000
 
-app.set('view engine', 'pug')
+app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-  res.render('home')
-})
+app.set('view engine', 'pug') //--> view engine tanımlıyoruz, çünkü pug gibi bissürü view engine var, express'in bunu bilmesi lazım
+
+app.use('/passengers', passengerRouter)
+app.use('/drivers',driverRouter)
+app.use('/booking',bookingRouter)
+app.use('/', indexRouter)
 
 
-app.get('/questions',(req,res) => {
-    res.render('questions')
-})
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+module.exports = app

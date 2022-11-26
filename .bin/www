@@ -1,0 +1,6 @@
+const app = require('../')
+
+app.listen(3000, () => {// 127.0.0.1 dünyanın neresinde olursan ol bilgisayarını gösteriyor  127.0.0.1 === localhost
+    console.log('started listening on 3000')
+})
+// bunu yapmadaki amacımız uygulamayı export edip illa bir sabit porta bağlı etmeden çalıştırabilmek 
