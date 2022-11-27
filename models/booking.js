@@ -10,11 +10,11 @@ const BookingSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Passenger',
         autopopulate:{maxDepth:1}
-
     },
     origin: String,
     destination: String
 })
 
 BookingSchema.plugin(require('mongoose-autopopulate'))
+
 module.exports = mongoose.model('Booking',BookingSchema)
