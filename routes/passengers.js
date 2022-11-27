@@ -35,7 +35,7 @@ router.post('/:passengerId/bookings', async(req,res)=> { // bu fonksiyonun adı 
 
     const booking = await passengerService.book(driverId,passengerId,origin,destination)
 
-    res.send(booking)
+    res.send(booking) // bunu neden geriye döndürüyoruz ?????????, res.send'e bakabilirsin
 
 
     // const passenger = await passengerService.findBy("id",req.params.passengerId)

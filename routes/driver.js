@@ -16,6 +16,7 @@ router.post('/', async (req,res) => {
 
 
 router.delete('/:driverId', async(req,res)=> {
+    
     await driverService.removeBy('_id',req.params.driverId)
 
     res.send('OK')
