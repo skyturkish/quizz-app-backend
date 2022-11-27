@@ -30,6 +30,7 @@ PassengerSchema.methods.book = async function(driver,origin,destination){
 }
 
 PassengerSchema.plugin(require('mongoose-autopopulate'))
+
 module.exports =mongoose.model('Passenger',PassengerSchema)
 
 
