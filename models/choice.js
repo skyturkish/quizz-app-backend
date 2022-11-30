@@ -1,22 +1,21 @@
 const mongoose = require('mongoose')
 const options = { discriminatorKey: 'kind' }
 
+const ChoiceSchema = new mongoose.Schema({},options);
 
-const choiceSchema = new mongoose.Schema({},options);
+const Choice = mongoose.model('Choice', ChoiceSchema);
 
-const Choice = mongoose.model('Choice', choiceSchema);
+const TrueOrFalseChoiceSchema = new mongoose.Schema({ choice1: Boolean, choice2: Boolean }, options)
 
-const trueOrFalseChoiceSchema = new mongoose.Schema({ choice1: Boolean, choice2: Boolean }, options)
+const trueOrFalseChoice = Choice.discriminator('TrueOrFalseChoice',TrueOrFalseChoiceSchema);
 
-const trueOrFalseChoice = Choice.discriminator('TrueOrFalseChoice',trueOrFalseChoiceSchema);
+const MultipleChoiceChoiceSchema = new mongoose.Schema({ choice1: String, choice2: String, choice3: String, choice4: String, }, options)
 
-const multipleChoiceChoiceSchema = new mongoose.Schema({ choice1: String, choice2: String, choice3: String, choice4: String, }, options)
+const multipleChoiceChoice = Choice.discriminator('MultipleChoiceChoice',MultipleChoiceChoiceSchema);
 
-const multipleChoiceChoice = Choice.discriminator('MultipleChoiceChoice',multipleChoiceChoiceSchema);
+const FreeWriteChoiceSchema = new mongoose.Schema({ choice1: String, }, options)
 
-const freeWriteChoiceSchema = new mongoose.Schema({ choice1: String, }, options)
-
-const freeWriteChoice  = Choice.discriminator('FreeWriteChoice',freeWriteChoiceSchema);
+const freeWriteChoice  = Choice.discriminator('FreeWriteChoice',FreeWriteChoiceSchema);
 
 
 module.exports = { Choice, trueOrFalseChoice, multipleChoiceChoice, freeWriteChoice}
