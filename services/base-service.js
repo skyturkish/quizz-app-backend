@@ -6,7 +6,7 @@ class BaseDataBase{
         return this.model.insert(objects)
     }
      load(){
-       return this.model.find() // hepsini getiriyor
+       return this.model.find() 
     }
     async insert(object){
          return await this.model.create(object)
