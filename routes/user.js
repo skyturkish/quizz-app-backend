@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const {userService} = require('../services')
+const userService = require('../services/user-service')
+const axios = require('axios').default;
 
 
 router.get('/', async(req,res)=> {
@@ -8,7 +9,6 @@ router.get('/', async(req,res)=> {
 
 router.post('/', async(req,res,next)=> { 
     try {
-
         const user = await userService.insert(req.body)
 
         res.send(user) 
