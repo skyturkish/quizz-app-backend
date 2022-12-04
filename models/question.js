@@ -6,11 +6,17 @@ const QuestionSchema = new mongoose.Schema({
         required:true,
         minlength:6
     },
-    choice : {
+    answer : {
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Choice',
+        ref:'Answer',
     },
-    trueChoice: String
   });
+
+    QuestionSchema.methods.createQuestion = function(answer){
+
+    const question = QuestionSchema.create(this.question,answer)
+    
+    return question;
+}
 
 module.exports = mongoose.model('Question',QuestionSchema)

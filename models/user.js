@@ -7,19 +7,10 @@ const UserSchema = new mongoose.Schema({
     },
     quizs: [{
             type:mongoose.Schema.Types.ObjectId,
-            ref:'Quiz'
+            ref:'Quiz',
+            autopopulate:{maxDepth:2}
         }]
   });
-
-
-  UserSchema.methods.addNewQuiz = async function(quiz){
-
-    this.quizs.push(quiz) 
-
-    await this.save()
-    
-    return quiz
-}
 
 
 module.exports = mongoose.model('User',UserSchema)

@@ -1,24 +1,18 @@
 const mongoose = require('mongoose')
 
 const QuizSchema = new mongoose.Schema({
-    ownerId: {
-        type: String
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        autopopulate:{maxDepth:1}
+
     },
     questions: [{
             type:mongoose.Schema.Types.ObjectId,
-            ref:'Question'
+            ref:'Question',
+
         }]
   });
-
-
-  QuizSchema.methods.addQuestion = async function(question){
-
-    this.questions.push(question) 
-
-    await this.save()
-    
-    return question
-}
-
 
 module.exports = mongoose.model('Quiz',QuizSchema)
