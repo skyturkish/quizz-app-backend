@@ -13,7 +13,7 @@ class UserService extends BaseService {
 
         console.log('quiz yaratacam')
 
-            // şunu normal denesene bir ara
+                                           // this must be like this ???
         const quiz = await QuizService.insert({owner: user, quizs: []})
   
         console.log('su an buradayım')

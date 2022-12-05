@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     quizs: [{
             type:mongoose.Schema.Types.ObjectId,
             ref:'Quiz',
-            autopopulate:{maxDepth:2}
+            autopopulate:{maxDepth:1}
         }]
   });
 
