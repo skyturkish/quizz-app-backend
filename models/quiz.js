@@ -4,7 +4,8 @@ const QuizSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        autopopulate:{maxDepth:2}
+        // if you dont want to autopopulate => autopopulate: false
+        autopopulate:{maxDepth:1}
 
     },
     questions: [{

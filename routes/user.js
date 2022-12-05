@@ -35,7 +35,7 @@ router.get('/:userId/quizs', async(req,res)=> {
 
     if(!user) return res.status(404).send('Cannot find user\nquiz!')
 
-    console.log(user.quizs.owner)
+    
     res.send(user.quizs)
 
 })
