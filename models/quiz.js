@@ -13,4 +13,6 @@ const QuizSchema = new mongoose.Schema({
         }]
   });
 
+QuizSchema.plugin(require('mongoose-autopopulate'))
+
 module.exports = mongoose.model('Quiz',QuizSchema)

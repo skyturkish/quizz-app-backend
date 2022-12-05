@@ -57,4 +57,6 @@ const QuestionSchema = new mongoose.Schema({
           }    
 }
 
+QuestionSchema.plugin(require('mongoose-autopopulate'))
+
 module.exports = mongoose.model('Question',QuestionSchema)
