@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const Quiz = require('./quiz')
+
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -11,6 +13,8 @@ const UserSchema = new mongoose.Schema({
             autopopulate:{maxDepth:2}
         }]
   });
+
+
 
 
 module.exports = mongoose.model('User',UserSchema)

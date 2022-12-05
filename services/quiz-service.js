@@ -1,7 +1,6 @@
 const BaseService = require('./base-service')
 
 const Quiz = require('../models/quiz')
-const Answer = require('../models/answer')
 const Question = require('../models/question')
 
 class QuizService extends BaseService {
