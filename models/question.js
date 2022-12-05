@@ -6,17 +6,57 @@ const QuestionSchema = new mongoose.Schema({
         required:true,
         minlength:6
     },
-    answer : {
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Answer',
+    answerType: {
+        type: String,
+        enum : ['default','trueOrFalse','freeAnswer'],
+        default: 'default'
     },
+    choice1 : {
+        type:String,
+        ref:'Choice',
+        required: true
+    },
+    choice2 : {
+        type:String,
+        ref:'Choice',
+        required: true
+    },
+    choice3 : {
+        type:String,
+        ref:'Choice',
+        required: true
+    },
+    choice4 : {
+        type:String,
+        ref:'Choice',
+        required: true
+    },
+    trueChoice: {
+        type:String,
+        ref:'Choice',
+        required: true
+    }
   });
 
     QuestionSchema.methods.createQuestion = function(answer){
-
-    const question = QuestionSchema.create(this.question,answer)
+        switch(this.answerType) {   
+            case 'default':
+                question = QuestionSchema.create(this)
     
-    return question;
+                return question;
+    
+            case 'trueOrFalse':
+                question = QuestionSchema.create(this.question,this.answerType,this.choice1,this.choice2,'','',this.trueChoice)
+    
+                return question; 
+    
+            case 'freeAnswer':
+                question = QuestionSchema.create(this.question,this.answerType,'','','','',this.trueChoice)
+    
+                return question; 
+          }    
 }
+
+QuestionSchema.plugin(require('mongoose-autopopulate'))
 
 module.exports = mongoose.model('Question',QuestionSchema)

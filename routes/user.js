@@ -10,6 +10,17 @@ router.get('/', async(req,res)=> {
     res.send(users)
 })
 
+router.post('/', async(req,res,next)=> { 
+    try {
+        const user = await userService.insert(req.body)
+
+        res.send(user) 
+        
+    } catch (e) {
+        next(e) 
+    }
+})
+
 router.get('/:userId', async(req,res)=> {
     const user = await userService.find(req.params.userId) 
 
@@ -19,22 +30,19 @@ router.get('/:userId', async(req,res)=> {
 
 })
 
-router.get('/:userId/quiz', async(req,res)=> {
+router.get('/:userId/quizs', async(req,res)=> {
     const user = await userService.find(req.params.userId) 
 
     if(!user) return res.status(404).send('Cannot find user\nquiz!')
 
+    console.log(user.quizs.owner)
     res.send(user.quizs)
 
 })
 
-router.post('/:userId/quiz', async(req,res)=> {
+router.post('/:userId/quizs', async(req,res)=> {
     const {userId} = req.params
 
-    const user = await userService.find(userId) 
-
-    if(!user) return res.status(404).send('Cannot find user\nquiz!')
-    
     const quiz = await userService.createQuiz(userId)
     
     res.send(quiz)
@@ -60,15 +68,6 @@ router.post('/:userId/quiz/:quizId', async(req,res) => {
 })
 
 
-router.post('/', async(req,res,next)=> { 
-    try {
-        const user = await userService.insert(req.body)
 
-        res.send(user) 
-        
-    } catch (e) {
-        next(e) 
-    }
-})
 
 module.exports = router
