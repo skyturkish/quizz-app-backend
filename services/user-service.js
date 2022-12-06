@@ -5,7 +5,7 @@ const User = require('../models/user')
 
 class UserService extends BaseService {
 
-    async createQuiz(userId){
+    async createQuiz(userId,name){
 
         console.log('user bulacam')
 
@@ -14,7 +14,7 @@ class UserService extends BaseService {
         console.log('quiz yaratacam')
 
                                            // this must be like this ???
-        const quiz = await QuizService.insert({owner: user, quizs: []})
+        const quiz = await QuizService.insert({owner: user,name: name, quizs: []})
   
         console.log('su an buradayım')
         console.log(quiz)

@@ -8,6 +8,11 @@ const QuizSchema = new mongoose.Schema({
         autopopulate:{maxDepth:1}
 
     },
+    // why required = true will be problem ?
+    // when const quiz = await QuizService.insert({owner: user,name: quizName, quizs: []})
+    // ????????????
+    name: String,
+    
     questions: [{
             type:mongoose.Schema.Types.ObjectId,
             ref:'Question',

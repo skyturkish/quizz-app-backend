@@ -43,7 +43,9 @@ router.get('/:userId/quizs', async(req,res)=> {
 router.post('/:userId/quizs', async(req,res)=> {
     const {userId} = req.params
 
-    const quiz = await userService.createQuiz(userId)
+    const {name} = req.body
+
+    const quiz = await userService.createQuiz(userId,name)
     
     res.send(quiz)
 
@@ -60,8 +62,6 @@ router.post('/:userId/quiz/:quizId', async(req,res) => {
     if(!user) return res.status(404).send('Cannot find user\nquiz!')
 
     const quiz = await quizService.addQuestion(quizId,questionText,answerType,choice1,choice2,choice3,choice4,trueChoice)
-
-
 
     res.send(user.quizs)
 
