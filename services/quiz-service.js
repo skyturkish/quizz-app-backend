@@ -1,7 +1,7 @@
 const BaseService = require('./base-service')
-
 const Quiz = require('../models/quiz')
 const Question = require('../models/question')
+const QuestionService = require('./question-service.js')
 
 class QuizService extends BaseService {
 
@@ -10,21 +10,14 @@ class QuizService extends BaseService {
         console.log(...arguments)
 
         const quiz = await this.find(quizId)
-        
-        const answer = Answer.create(answerType,choice1,choice2,choice3,choice4,trueChoice)
-        
-        const question = Question.create(questionText,answer.createAnswer)
-
+    
+        const question = await QuestionService.insert({questionText: questionText,answerType: answerType,choice1: choice1,choice2: choice2,choice3 :choice3,choice4: choice4,trueChoice: trueChoice})
 
         quiz.questions.push(question) 
-
-        await this.save()             
+        
+        await quiz.save()             
   
         return quiz
      }
-     
-  
-   
 }
-
 module.exports = new QuizService(Quiz)

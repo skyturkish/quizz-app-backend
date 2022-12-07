@@ -9,10 +9,16 @@ router.get('/',async (req,res) => {
 
 })
 
-router.post('/', async (req,res) => {
-    
-})
 
+router.get('/:quizId',async (req,res) => {
+    const {quizId} = req.params
+
+    const quiz = await quizService.find(quizId) 
+
+    if(!quiz) return res.status(404).send('Cannot find quiz!')
+
+    res.send(quiz)
+})
 
 
 module.exports = router

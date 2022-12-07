@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
 
 const QuestionSchema = new mongoose.Schema({
-    question: {
+    questionText: {
         type: String,
-        required:true,
         minlength:6
     },
     answerType: {
@@ -14,48 +13,25 @@ const QuestionSchema = new mongoose.Schema({
     choice1 : {
         type:String,
         ref:'Choice',
-        required: true
     },
     choice2 : {
         type:String,
         ref:'Choice',
-        required: true
     },
     choice3 : {
         type:String,
         ref:'Choice',
-        required: true
     },
     choice4 : {
         type:String,
         ref:'Choice',
-        required: true
     },
     trueChoice: {
         type:String,
         ref:'Choice',
-        required: true
     }
   });
-
-    QuestionSchema.methods.createQuestion = function(answer){
-        switch(this.answerType) {   
-            case 'default':
-                question = QuestionSchema.create(this)
-    
-                return question;
-    
-            case 'trueOrFalse':
-                question = QuestionSchema.create(this.question,this.answerType,this.choice1,this.choice2,'','',this.trueChoice)
-    
-                return question; 
-    
-            case 'freeAnswer':
-                question = QuestionSchema.create(this.question,this.answerType,'','','','',this.trueChoice)
-    
-                return question; 
-          }    
-}
+  
 
 QuestionSchema.plugin(require('mongoose-autopopulate'))
 
