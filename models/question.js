@@ -11,24 +11,19 @@ const QuestionSchema = new mongoose.Schema({
         default: 'default'
     },
     choice1 : {
-        type:String,
-        ref:'Choice',
+        type:String
     },
     choice2 : {
-        type:String,
-        ref:'Choice',
+        type:String
     },
     choice3 : {
-        type:String,
-        ref:'Choice',
+        type:String
     },
     choice4 : {
-        type:String,
-        ref:'Choice',
+        type:String
     },
     trueChoice: {
-        type:String,
-        ref:'Choice',
+        type:String
     }
   });
   

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
-const Quiz = require('./quiz')
-
 
 const UserSchema = new mongoose.Schema({
+    // can you upload user's name with set operation ?????
     name: {
         type: String,
         required: true

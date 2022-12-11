@@ -21,6 +21,14 @@ router.post('/', async(req,res,next)=> {
     }
 })
 
+router.delete('/:userId', async(req,res)=> {
+    const {userId} = req.params
+
+    await userService.removeBy('_id',userId)
+
+    res.send('OK')
+})
+
 router.get('/:userId', async(req,res)=> {
     const {userId} = req.params
 
@@ -49,10 +57,15 @@ router.post('/:userId/quizs', async(req,res)=> {
 
     const {name} = req.body
 
-    const quiz = await userService.createQuiz(userId,name)
-    
-    res.send(quiz)
+    if (!userId.match(/^[0-9a-fA-F]{24}$/)) return res.status(404).send('Cannot find user') 
 
+    const user = await userService.find(userId) 
+
+    if(!user) return res.status(404).send('Cannot find user!')
+    
+    const quiz = await userService.createQuiz(userId,name)
+        
+    res.send(quiz)
 })
 
 router.get('/:userId/quizs/:quizId', async(req,res) => {
@@ -67,6 +80,7 @@ router.get('/:userId/quizs/:quizId', async(req,res) => {
 
 })
 
+// this is router ? not service, change this
 router.post('/:userId/quizs/:quizId', async(req,res) => {
     
     const {userId,quizId} = req.params
