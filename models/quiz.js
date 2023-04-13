@@ -5,6 +5,7 @@ const QuizSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         // if you dont want to autopopulate => autopopulate: false
+        // you can also just delete, you dont have to write => autopopulate: false
         autopopulate:{maxDepth:1}
 
     },
